@@ -1,14 +1,4 @@
-  /*
-  There are three approaches to integrating these functions and event handlers into our program
-
-  1. Put the functions in maze_solver.js as functions of the class and
-    put the event handlers in the grid constructor
-  2. Export the class in maze_solver.js and import it here
-  3. Do #2 but create setters and getters in maze_solver.js class to
-    limit (what I think could be) potential issues and tedious implementation
-  
-  */
-  
+ 
   function moveForward() {
 
     alert("Forward Button Clicked!"); // event handling check
@@ -22,6 +12,9 @@
 
     // set the next move to a path
     maze[x][y] = path;
+
+    // update current step
+    currStep++;
 
     alert("Forward Button Clicked!");
   }
@@ -39,6 +32,9 @@
 
     // set the current gridspace to an empty space
     maze[x][y] = empty;
+
+    // update current step
+    currStep--;
 
     alert("Backwards Button Clicked!");
   }
