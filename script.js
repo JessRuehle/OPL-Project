@@ -100,9 +100,16 @@ let currStep = 0;
             // get the (x, y) coords of next move
             y = fastestPath[currStep + 1][0];
             x = fastestPath[currStep + 1][1];
+
+            // get the (x, y) coords of current move
+            yCurr = fastestPath[currStep][0];
+            xCurr = fastestPath[currStep][1];
         
             // set the next move to a path
             grid[y][x] = calhoun_char;
+
+            // set last move
+            grid[yCurr][Curr] = empty;
         
             // update current step
             currStep++;
