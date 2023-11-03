@@ -71,16 +71,9 @@
                         // Adjust the image size using JavaScript
                         cellImg.style.width = '65px'; // Adjust the size as needed
                         cellImg.style.height = '65px'; // Adjust the size as needed
-        
-                        // Center the image vertically within the flex container
-                        // cellImg.style.margin = '50';
+    
         
                         rowDiv.appendChild(cellImg);
-                    } else {
-                        // Handle the case where there's no image for the character
-                        const cellSpan = document.createElement("span");
-                        cellSpan.textContent = character + "   ";
-                        rowDiv.appendChild(cellSpan);
                     }
                 }
                 characterGridDiv.appendChild(rowDiv);
