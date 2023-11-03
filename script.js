@@ -1,41 +1,11 @@
-        // Function to generate a random character
-        function getRandomCharacter() {
-            const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            const randomIndex = Math.floor(Math.random() * characters.length);
-            return characters[randomIndex];
-        }
-
-        // Function to generate a 2D array of random characters
-        function generateRandomCharacterGrid(rows, cols) {
-            const grid = [];
-            for (let i = 0; i < rows; i++) {
-                const row = [];
-                for (let j = 0; j < cols; j++) {
-                    row.push(getRandomCharacter());
-                }
-                grid.push(row);
-            }
-            return grid;
-        }
-
-        // Function to display the character grid on the website
-        // function displayImageGrid(grid) 
-        // {
-        //     const characterGridDiv = document.getElementById("characterGrid");
-        //     characterGridDiv.innerHTML = "";
-
-        //     for (let i = 0; i < grid.length; i++) 
-        //     {
-        //         const rowDiv = document.createElement("div");
-        //         for (let j = 0; j < grid[i].length; j++) 
-        //         {
-        //             const cellSpan = document.createElement("span");
-        //             cellSpan.textContent = grid[i][j] + "   ";
-        //             rowDiv.appendChild(cellSpan);
-        //         }
-        //         characterGridDiv.appendChild(rowDiv);
-        //     }
-        // }
+// THESE ARE just the current values, nothing is dependent on them, change them here and everything will work the same
+const calhoun_char = 'b';
+const out_letter = 'e';
+const wall = '1';
+const empty = '-';
+const path = 'p';
+const fastest_path_count = 0;    
+let currStep = 0;    
 
         function displayImageGrid(grid) {
             const characterGridDiv = document.getElementById("characterGrid");
@@ -43,10 +13,10 @@
         
             // Define the mapping for your characters to image sources
             const characterToImage = {
-                '1': 'border.png',
-                '-': 'tile.png',
-                'b': 'start.png',
-                'e': 'exit.png',
+                [wall] : 'border.png',
+                [empty] : 'tile.png',
+                [calhoun_char] : 'start.png',
+                [out_letter] : 'exit.png',
             };
         
             for (let i = 0; i < grid.length; i++) 
@@ -100,7 +70,66 @@
 
         let grid = gridifyMaze(mazeMess, numRows, numCols);
 
-
-        // Generate the random character grid and display it
-        const randomCharacterGrid = generateRandomCharacterGrid(numRows, numCols);
         displayImageGrid(grid);
+
+        let solver = new Maze_Solver(grid);
+        solver.solve();
+        let fastestPath = solver.getFastestPath();
+        for (let i = 0; i < fastestPath.length; i++) {
+            console.log(fastestPath[i][0] + " " + fastestPath[i][1]);
+        }
+
+        // access the two html button objects
+        const buttonForward = document.getElementById('forward_button');
+        const buttonBackwards = document.getElementById('backwards_button');
+                
+        // add event handling to each button
+        buttonForward.addEventListener('click', () => {
+            moveForward();
+            displayImageGrid(grid);
+        });
+        buttonBackwards.addEventListener('click', () => moveBackwards());
+
+        function moveForward() {
+
+            // alert("Forward Button Clicked!"); // event handling check
+        
+            // check to make sure we do not read out of bounds
+            if (currStep + 1 >= fastestPath.length) { return; }
+        
+            // get the (x, y) coords of next move
+            y = fastestPath[currStep + 1][0];
+            x = fastestPath[currStep + 1][1];
+        
+            // set the next move to a path
+            grid[y][x] = calhoun_char;
+        
+            // update current step
+            currStep++;
+        
+            // alert("Forward Button Clicked!");
+          }
+        
+          function moveBackwards() {
+        
+            // alert("Backwards Button Clicked!"); // event handling check
+        
+            // check to make sure we do not read out of bounds
+            if (currStep < 0 || currStep > maze.length) { return; }
+        
+            // get the (x, y) coords of the current move
+            x = fastestPath[currStep][0];
+            y = fastestPath[currStep][1];
+        
+            // set the current gridspace to an empty space
+            grid[x][y] = empty;
+        
+            // update current step
+            currStep--;
+        
+            alert("Backwards Button Clicked!");
+          }
+        
+
+
+
