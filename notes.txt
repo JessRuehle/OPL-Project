@@ -1,0 +1,9 @@
+steps
+
+// move forward
+1. using numStep int, get x and y vals from fastestPath for next step (numStep + 1)
+2. set grid next step (x, y) to p
+
+// move backwards
+1. using numstep int, get x and y vals from fastestPath for current step
+2. set grid current step (x, y) to p
