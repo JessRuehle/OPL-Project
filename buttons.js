@@ -9,7 +9,7 @@
   
   */
   
-  function moveForward(currStep) {
+  function moveForward() {
 
     alert("Forward Button Clicked!"); // event handling check
 
@@ -26,7 +26,7 @@
     alert("Forward Button Clicked!");
   }
 
-  function moveBackwards(currStep, maze, fastestPath) {
+  function moveBackwards() {
 
     alert("Backwards Button Clicked!"); // event handling check
 
@@ -48,5 +48,5 @@
   const buttonBackwards = document.getElementById('backwards_button');
 
   // add event handling to each button
-  buttonForward.addEventListener('click', () => moveForward(/* add args here */));
-  buttonBackwards.addEventListener('click', () => moveBackwards(/* add args here */));
+  buttonForward.addEventListener('click', () => moveForward());
+  buttonBackwards.addEventListener('click', () => moveBackwards());
